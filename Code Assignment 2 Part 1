@@ -1,0 +1,28 @@
+using UnityEngine;
+using System.Collections;
+
+public class allen_week02_01 : MonoBehaviour 
+{
+	public string name;
+	private string hello = "Hi, my name is";
+	private string goodbye = "This concludes this portion of the homework. Goodbye.";
+
+
+	void Main ()
+		{
+			print (hello + " " + name + ".");
+			print (goodbye);
+		}
+		
+
+	// Use this for initialization
+	void Start () 
+		{
+			
+		}
+	
+	// Update is called once per frame
+	void Update () {
+	
+	}
+}
