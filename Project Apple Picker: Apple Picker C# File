@@ -8,51 +8,37 @@ public class ApplePicker : MonoBehaviour {
 	public float basketBottomY = -14f;
 	public float basketSpacingY = 2f;
 	public List<GameObject> basketList;
-
-	// Use this for initialization
-	void Start () {
-		basketList = new List<GameObject> ();
+	
+	void Start () 
+	{
+		basketList = new List<GameObject>();
 		for (int i=0; i<numBaskets; i++) {
 			GameObject tBasketGO = Instantiate (basketPrefab) as GameObject;
 			Vector3 pos = Vector3.zero;
 			pos.y = basketBottomY + (basketSpacingY * i);
 			tBasketGO.transform.position = pos;
-			basketList.Add(tBasketGO); 
+			basketList.Add( tBasketGO ); // 3
 		}
 	}
-
-	public void AppleDestroyed (){
-		//Destroy all of the falling apples
-		GameObject[] tAppleArray = GameObject.FindGameObjectsWithTag ("Apple"); 
-		foreach (GameObject tGO in tAppleArray) {
-			Destroy(tGO);
+	public void AppleDestroyed() 
+	{ // 2
+		// Destroy all of the falling Apples
+		GameObject[] tAppleArray=GameObject.FindGameObjectsWithTag("Apple");// 3
+		foreach ( GameObject tGO in tAppleArray ) 
+		{
+			Destroy( tGO );
 		}
-		//Destroy one of the baskets
-		//Get the index of the last basket in basketList
+		// Destroy one of the Baskets
+		// Get the index of the last Basket in basketList
 		int basketIndex = basketList.Count-1;
-		// Get reference to that basket gameobject
+		// Get a reference to that Basket GameObject
 		GameObject tBasketGO = basketList[basketIndex];
-		// Remove the basket from the list and destroy the gameobject
-		basketList.RemoveAt ( basketIndex );
-		Destroy ( tBasketGO );
-	}
-
-	void OnCollisionEnter (Collision coll){
-		// Find out what hit this basket
-		GameObject collideWidth = coll.gameObject;
-		if (collideWidth.tag == "Apple") {
-			Destroy(collideWidth);
+		// Remove the Basket from the List and destroy the GameObject
+		basketList.RemoveAt( basketIndex );
+		Destroy( tBasketGO );
+		// Restart the game, which doesn't affect HighScore.Score
+		if ( basketList.Count == 0 ) {
+			Application.LoadLevel( "Scene_0" );
 		}
-		// Parse the text of the scoreGT into an int
-		int score = int.Parse (scoreGT.text);
-		// Add Points for catching the apple
-		score += 100;
-		// COnvert the score back to string and display it
-		scoreGT.text = score.ToString();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
 	}
 }
